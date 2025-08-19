@@ -1,3 +1,20 @@
+// {
+//   "files": [],
+//   "references": [
+//     { "path": "./tsconfig.app.json" },
+//     { "path": "./tsconfig.node.json" }
+//   ],
+//   "compilerOptions": {
+//     "baseUrl": "",
+//     "paths": {
+//       "@/*": ["src/*"]
+//     },
+//     "forceConsistentCasingInFileNames": true,
+//     "strict": true
+//   }
+// }
+
+
 {
   "files": [],
   "references": [
@@ -5,7 +22,7 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "baseUrl": "",
+    "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
     },
@@ -13,3 +30,4 @@
     "strict": true
   }
 }
+
