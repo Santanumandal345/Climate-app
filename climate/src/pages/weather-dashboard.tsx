@@ -1,511 +1,92 @@
 
 
-// const WeatherDashboard = () => {
-//   return (
-//     <div>
-//       <h1>Weather Dashboard</h1>
-//     </div>
-//   )
-// }
-
-// // export default WeatherDashboard
-
-
-
-
-
-
-// import { Button } from '@/components/ui/button'
-// import { RefreshCcw } from 'lucide-react'
-
-
-// import { useGeolocation } from '@/hooks/use-geolocation'
-
-// const WeatherDashboard = () => {
-//   const { coordinates, error, isLoading, getLocation } = useGeolocation();
-  
-//   const handleRefresh = () => {
-//     getLocation();
-//     if(coordinates) {
-//       console.log(`Current coordinates: Latitude ${coordinates.lat}, Longitude ${coordinates.lon}`);
-//     }
-//   };
-
-
-
-
-//   return (
-//     <div className="space-y-4">
-//       <div className="flex items-center justify-between">
-//       <h1 className="text-3xl font-bold tracking-tight">My Loction</h1>
-//         <Button
-//           variant="outline"
-//           size={"icon"}
-          
-//         >
-//           <RefreshCcw className='h-4 w-4' />
-//         </Button>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default WeatherDashboard
-
-
-
-
-
-// import { Button } from '@/components/ui/button';
-// import { RefreshCcw } from 'lucide-react';
-// import { useGeolocation } from '@/hooks/use-geolocation';
-// import WeatherSkeleton from '@/components/loading-skeleton';
-
-// const WeatherDashboard = () => {
-//   const { coordinates, error, isLoading, getLocation, locationLoading } = useGeolocation();
-
-//   const handleRefresh = () => {
-//     getLocation();
-//     if (coordinates) {
-//       console.log(
-//         `Current coordinates: Latitude ${coordinates.lat}, Longitude ${coordinates.lon}`
-//       );
-//     }
-//   };
-
-
-//   if (locationLoading) {
-//     return <WeatherSkeleton />;
-//   }
-
-//   return (
-//     <div className="space-y-4">
-//       <div className="flex items-center justify-between">
-//         <h1 className="text-3xl font-bold tracking-tight">My Location</h1>
-//         <Button
-//           variant="outline"
-//           size="icon"
-//           onClick={handleRefresh}
-//         >
-//           <RefreshCcw className="h-4 w-4" />
-//         </Button>
-//       </div>
-
-//       {isLoading && <p>Fetching location...</p>}
-//       {error && <p className="text-red-500">{error}</p>}
-//       {coordinates && (
-//         <p>
-//           Latitude: {coordinates.lat}, Longitude: {coordinates.lon}
-//         </p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default WeatherDashboard;
-
-
-// import { useEffect } from 'react';
-// import { Button } from '@/components/ui/button';
-// import { AlertTriangle, MapPin, RefreshCcw } from 'lucide-react';
-// import { useGeolocation } from '@/hooks/use-geolocation';
-// import WeatherSkeleton from '@/components/loading-skeleton';
-// import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-
-// const WeatherDashboard = () => {
-//   const { coordinates, error, isLoading, getLocation, locationLoading, locationError } = useGeolocation();
-
-//   const handleRefresh = () => {
-//     getLocation();
-//   };
-
-//   // Log coordinates whenever they change
-//   useEffect(() => {
-//     if (coordinates) {
-//       console.log(`Current coordinates: Latitude ${coordinates.lat}, Longitude ${coordinates.lon}`);
-//     }
-//   }, [coordinates]);
-
-//   if (locationLoading) {
-//     return <WeatherSkeleton />;
-//   }
-//   if (locationError) {
-//     return (
-//       <Alert variant={"destructive"}>
-//         <AlertTriangle className="h-4 w-4" />
-//         <AlertTitle>Error location</AlertTitle>
-//         <AlertDescription className="flex flex-col gap-4">
-//           <p>{error}</p>
-//           <Button onClick={getLocation} variant={"outline"} className='w-fit'>
-//             <MapPin className="h-4 w-4 mr-2" />
-//             Retry
-//           </Button>
-//         </AlertDescription>
-//       </Alert>
-//     )
-//   }
-
-
-//     return (
-//       <div className="space-y-4">
-//         <div className="flex items-center justify-between">
-//           <h1 className="text-3xl font-bold tracking-tight">My Location</h1>
-//           <Button
-//             variant="outline"
-//             size="icon"
-//             onClick={handleRefresh}
-//             disabled={isLoading}
-//           >
-//             <RefreshCcw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
-//           </Button>
-//         </div>
-
-//         {isLoading && <p>Fetching location...</p>}
-//         {error && <p className="text-red-500">{error}</p>}
-//         {coordinates && (
-//           <p>
-//             Latitude: {coordinates.lat}, Longitude: {coordinates.lon}
-//           </p>
-//         )}
-//       </div>
-//     );
-//   };
-
-
-// export default WeatherDashboard;
-
-
-
-
-
-// import { useEffect } from 'react';
-// import { Button } from '@/components/ui/button';
-// import { AlertTriangle, MapPin, RefreshCcw } from 'lucide-react';
-// import { useGeolocation } from '@/hooks/use-geolocation';
-// import WeatherSkeleton from '@/components/loading-skeleton';
-// import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-// import { useForecastQuery, useReverseGeocodeQuery, useWeatherQuery } from '@/hooks/use-weather';
-
-// const WeatherDashboard = () => {
-//   const {
-//     coordinates,
-//     error,
-//     isLoading,
-//     getLocation,
-//     locationLoading,
-//     locationError,
-//   } = useGeolocation();
-//   const weatherQuery = useWeatherQuery(coordinates);
-//   const locationQuery = useReverseGeocodeQuery(coordinates);
-//   const forecastQuery = useForecastQuery(coordinates);
-//   // console.log(locationQuery);
-
-//   const handleRefresh = () => {
-//     getLocation();
-//     if (coordinates) {
-//       weatherQuery.refetch();
-//       locationQuery.refetch();
-//       forecastQuery.refetch();
-//     }
-//   };
-
-//   // Log coordinates whenever they change
-//   useEffect(() => {
-//     if (coordinates?.lat != null && coordinates?.lon != null) {
-//       console.log(
-//         `Current coordinates: Lat ${coordinates.lat}, Lon ${coordinates.lon}`
-//       );
-//     }
-//   }, [coordinates]);
-
-//   // Show skeleton while initial location is loading
-//   if (locationLoading) {
-//     return <WeatherSkeleton />;
-//   }
-
-//   // Show error alert if location detection fails
-//   if (locationError) {
-//     return (
-//       <Alert variant="destructive">
-//         <AlertTriangle className="h-4 w-4" />
-//         <AlertTitle>Location Error</AlertTitle>
-//         <AlertDescription className="flex flex-col gap-4">
-//           <p>{error || 'Unable to detect your location.'}</p>
-//           <Button onClick={getLocation} variant="outline" className="w-fit">
-//             <MapPin className="h-4 w-4 mr-2" />
-//             Retry
-//           </Button>
-//         </AlertDescription>
-//       </Alert>
-//     );
-//   }
-
-
-//   if (!coordinates) {
-//     return (
-//       <Alert variant={"destructive"}>
-//         <AlertTitle>Location required</AlertTitle>
-//         <AlertDescription className='flex flex-col gap-4'>
-//           <p> Unable to retrieve your location. Please check your device settings.</p>
-//           <Button onClick={getLocation} variant={"outline"} className='w-fit'>
-//             <MapPin className="mr-2 h-4 w-4" />
-//             Enable Location
-//           </Button>
-//         </AlertDescription>
-//       </Alert>
-//     );
-//   }
-
-//   return (
-//     <div className="space-y-4">
-//       <div className="flex items-center justify-between">
-//         <h1 className="text-3xl font-bold tracking-tight">My Location</h1>
-//         <Button
-//           variant="outline"
-//           size="icon"
-//           onClick={handleRefresh}
-//           disabled={isLoading}
-//         >
-//           <RefreshCcw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
-//         </Button>
-//       </div>
-
-//       {isLoading && <p>Fetching location...</p>}
-//       {error && <p className="text-red-500">{error}</p>}
-//       {coordinates?.lat != null && coordinates?.lon != null && (
-//         <p>
-//           Latitude: {coordinates.lat}, Longitude: {coordinates.lon}
-//         </p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default WeatherDashboard;
-
-
-
-// import { useEffect } from 'react';
-// import { Button } from '@/components/ui/button';
-// import { AlertTriangle, MapPin, RefreshCcw } from 'lucide-react';
-// import { useGeolocation } from '@/hooks/use-geolocation';
-// import WeatherSkeleton from '@/components/loading-skeleton';
-// import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-// import {
-//   useForecastQuery,
-//   useReverseGeocodeQuery,
-//   useWeatherQuery,
-// } from '@/hooks/use-weather';
-
-// const WeatherDashboard = () => {
-//   const {
-//     coordinates,
-//     error,
-//     isLoading,
-//     getLocation,
-//     locationLoading,
-//     locationError,
-//   } = useGeolocation();
-
-//   const weatherQuery = useWeatherQuery(coordinates);
-//   const locationQuery = useReverseGeocodeQuery(coordinates);
-//   const forecastQuery = useForecastQuery(coordinates);
-//  / console. // console.log('Weather Query:', weatherQuery);
-//   // console.log('Location Query:', locationQuery);
-//   /log('Forecast Query:', forecastQuery);
-
-//   const handleRefresh = () => {
-//     getLocation(); // Only get location — refetch happens in useEffect
-//   };
-
-//   // Whenever coordinates change, log and refetch
-//   useEffect(() => {
-//     if (coordinates?.lat != null && coordinates?.lon != null) {
-//       console.log(
-//         `Current coordinates: Latitude ${coordinates.lat}, Longitude ${coordinates.lon}`
-//       );
-//       weatherQuery.refetch();
-//       locationQuery.refetch();
-//       forecastQuery.refetch();
-//     }
-//   }, [coordinates]);
-
-//   // Show skeleton while getting location initially
-//   if (locationLoading) {
-//     return <WeatherSkeleton />;
-//   }
-
-//   // Show error if location detection fails
-//   if (locationError) {
-//     return (
-//       <Alert variant="destructive">
-//         <AlertTriangle className="h-4 w-4" />
-//         <AlertTitle>Location Error</AlertTitle>
-//         <AlertDescription className="flex flex-col gap-4">
-//           <p>{error || 'Unable to detect your location.'}</p>
-//           <Button onClick={getLocation} variant="outline" className="w-fit">
-//             <MapPin className="h-4 w-4 mr-2" />
-//             Retry
-//           </Button>
-//         </AlertDescription>
-//       </Alert>
-//     );
-//   }
-
-//   if (!coordinates) {
-//     return (
-//       <Alert variant="destructive">
-//         <AlertTitle>Location required</AlertTitle>
-//         <AlertDescription className="flex flex-col gap-4">
-//           <p>
-//             Unable to retrieve your location. Please check your device settings.
-//           </p>
-//           <Button onClick={getLocation} variant="outline" className="w-fit">
-//             <MapPin className="mr-2 h-4 w-4" />
-//             Enable Location
-//           </Button>
-//         </AlertDescription>
-//       </Alert>
-//     );
-//   }
-//   const locationName = locationQuery.data?.[0];
-//   if (weatherQuery.error|| forecastQuery.error) {
-//     return (
-//       <Alert variant="destructive">
-//         <AlertTriangle className="h-4 w-4" />
-//         <AlertTitle>Error</AlertTitle>
-//         <AlertDescription className="flex flex-col gap-4">
-//           <p>
-//             Failed to fetch weather data. Please try again.
-//           </p>
-//           <Button onClick={handleRefresh} variant="outline" className="w-fit">
-//             <RefreshCcw className="mr-2 h-4 w-4" />
-//             Retry
-//           </Button>
-//         </AlertDescription>
-//       </Alert>
-//     );
-//   }
-//   return (
-//     <div className="space-y-4">
-//       <div className="flex items-center justify-between">
-//         <h1 className="text-3xl font-bold tracking-tight">My Location</h1>
-//         <Button
-//           variant="outline"
-//           size="icon"
-//           onClick={handleRefresh}
-//           disabled={weatherQuery.isFetching || forecastQuery.isFetching}
-//         >
-//           <RefreshCcw
-//             className={`h-4 w-4 ${weatherQuery.isFetching ? 'animate-spin' : ''}`}
-//           />
-//         </Button>
-//       </div>
-
-
-//       { }
-//       <div className='grid gap-6'>
-//         <div>
-//           { }
-//           <CurrentWeather    data={weatherQuery.data} locationName={locationName}/>
-//         </div>
-//       </div>
-
-      
-
-//       {isLoading && <p>Fetching location...</p>}
-//       {error && <p className="text-red-500">{error}</p>}
-//       {coordinates?.lat != null && coordinates?.lon != null && (
-//         <p>
-//           Latitude: {coordinates.lat}, Longitude: {coordinates.lon}
-//         </p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default WeatherDashboard;
-
-
-
-
-import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { AlertTriangle, MapPin, RefreshCcw } from "lucide-react";
-import { useGeolocation } from "@/hooks/use-geolocation";
+import CurrentWeather from "@/components/current-weather";
+import HourlyTemperature from "@/components/hourly-temperature";
 import WeatherSkeleton from "@/components/loading-skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import WeatherDetails from "@/components/weather-details";
+import WeatherForecast from "@/components/weather-forecast";
+import { useGeolocation } from "@/hooks/use-geolocation";
 import {
   useForecastQuery,
   useReverseGeocodeQuery,
   useWeatherQuery,
 } from "@/hooks/use-weather";
-import CurrentWeather from "@/components/current-weather";
+// import { useFavorites } from "@/hooks/use-favorites"; // ✅ import
+import { AlertTriangle, MapPin, RefreshCw, Star } from "lucide-react";
+import { toast } from "sonner";
+import { Link } from "react-router-dom";
+import { useFavorites } from "@/hooks/use-favorite";
 
 const WeatherDashboard = () => {
   const {
     coordinates,
-    error,
-    isLoading,
-    initialLoading,
-    hasCoordinates,
+    error: locationError,
+    isLoading: locationLoading,
     getLocation,
   } = useGeolocation();
 
   const weatherQuery = useWeatherQuery(coordinates);
-  const locationQuery = useReverseGeocodeQuery(coordinates);
   const forecastQuery = useForecastQuery(coordinates);
-   console.log('Weather Query:', weatherQuery);
- console.log('Location Query:', locationQuery);
-  console.log('Forecast Query:', forecastQuery);
+  const locationQuery = useReverseGeocodeQuery(coordinates);
 
+  const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   const handleRefresh = () => {
-    getLocation(); // Only get location — refetch happens in useEffect
+    getLocation();
+    if (coordinates) {
+      weatherQuery.refetch();
+      forecastQuery.refetch();
+      locationQuery.refetch();
+    }
   };
 
-  // Refetch when coordinates change
-  useEffect(() => {
-    if (coordinates?.lat != null && coordinates?.lon != null) {
-      console.log(
-        `Current coordinates: Latitude ${coordinates.lat}, Longitude ${coordinates.lon}`
-      );
-      weatherQuery.refetch();
-      locationQuery.refetch();
-      forecastQuery.refetch();
-    }
-  }, [coordinates]);
+  const handleToggleFavorite = () => {
+    if (!coordinates || !locationName) return;
 
-  if(locationLoding){
+    const { lat, lon } = coordinates;
+    if (isFavorite(lat, lon)) {
+      removeFavorite.mutate(`${lat}-${lon}`);
+      toast.success("Removed from favorites");
+    } else {
+      addFavorite.mutate({
+        name: locationName.name,
+        lat,
+        lon,
+        country: locationName.country,
+        state: locationName.state,
+      });
+      toast.success("Added to favorites");
+    }
+  };
+
+  if (locationLoading) {
     return <WeatherSkeleton />;
   }
 
-  // Error: location detection failed
-  if (error) {
+  if (locationError) {
     return (
       <Alert variant="destructive">
         <AlertTriangle className="h-4 w-4" />
         <AlertTitle>Location Error</AlertTitle>
         <AlertDescription className="flex flex-col gap-4">
-          <p>{error || "Unable to detect your location."}</p>
+          <p>{locationError}</p>
           <Button onClick={getLocation} variant="outline" className="w-fit">
-            <MapPin className="h-4 w-4 mr-2" />
-            Retry
+            <MapPin className="mr-2 h-4 w-4" />
+            Enable Location
           </Button>
         </AlertDescription>
       </Alert>
     );
   }
 
-  // No coordinates available
-  if (!hasCoordinates) {
+  if (!coordinates) {
     return (
       <Alert variant="destructive">
-        <AlertTitle>Location required</AlertTitle>
+        <AlertTitle>Location Required</AlertTitle>
         <AlertDescription className="flex flex-col gap-4">
-          <p>
-            Unable to retrieve your location. Please check your device settings.
-          </p>
+          <p>Please enable location access to see your local weather</p>
           <Button onClick={getLocation} variant="outline" className="w-fit">
             <MapPin className="mr-2 h-4 w-4" />
             Enable Location
@@ -523,9 +104,9 @@ const WeatherDashboard = () => {
         <AlertTriangle className="h-4 w-4" />
         <AlertTitle>Error</AlertTitle>
         <AlertDescription className="flex flex-col gap-4">
-          <p>Failed to fetch weather data. Please try again.</p>
+          <p>Failed to fetch weather data. Please try again</p>
           <Button onClick={handleRefresh} variant="outline" className="w-fit">
-            <RefreshCcw className="mr-2 h-4 w-4" />
+            <RefreshCw className="mr-2 h-4 w-4" />
             Retry
           </Button>
         </AlertDescription>
@@ -535,43 +116,96 @@ const WeatherDashboard = () => {
 
   if (!weatherQuery.data || !forecastQuery.data) {
     return <WeatherSkeleton />;
-    
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">My Location</h1>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={handleRefresh}
-          disabled={weatherQuery.isFetching || forecastQuery.isFetching}
-        >
-          <RefreshCcw
-            className={`h-4 w-4 ${
-              weatherQuery.isFetching ? "animate-spin" : ""
-            }`}
-          />
-        </Button>
-      </div>
-
-      <div className="grid gap-6">
-        <div>
-          {weatherQuery.data && (
-            <CurrentWeather
-              data={weatherQuery.data}
-              locationName={locationName}
+        <div className="flex gap-2">
+          <Button
+            variant={isFavorite(coordinates.lat, coordinates.lon) ? "default" : "outline"}
+            size="icon"
+            onClick={handleToggleFavorite}
+          >
+            <Star
+              className={`h-4 w-4 ${
+                isFavorite(coordinates.lat, coordinates.lon)
+                  ? "fill-yellow-400 text-yellow-400"
+                  : ""
+              }`}
             />
-          )}
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={handleRefresh}
+            disabled={weatherQuery.isFetching || forecastQuery.isFetching}
+          >
+            <RefreshCw
+              className={`h-4 w-4 ${weatherQuery.isFetching ? "animate-spin" : ""}`}
+            />
+          </Button>
         </div>
       </div>
 
-      {isLoading && !initialLoading && <p>Updating location...</p>}
-      {coordinates?.lat != null && coordinates?.lon != null && (
-        <p>
-          Latitude: {coordinates.lat}, Longitude: {coordinates.lon}
-        </p>
+      {/* Current and Hourly Forecast */}
+      <div className="grid gap-6">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <CurrentWeather data={weatherQuery.data} locationName={locationName} />
+          <HourlyTemperature data={forecastQuery.data} />
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 items-start">
+          <WeatherDetails data={weatherQuery.data} />
+          <WeatherForecast data={forecastQuery.data} />
+        </div>
+      </div>
+
+      {/* Favorites Section */}
+      {favorites.length > 0 && (
+        <div>
+          <h2 className="text-xl font-semibold mt-6">⭐ Favorite Cities</h2>
+          <ul className="grid gap-3 mt-3 md:grid-cols-2 lg:grid-cols-3">
+            {favorites.map((city: {
+              id: string;
+              name: string;
+              lat: number;
+              lon: number;
+              country: string;
+              state?: string;
+            }) => (
+              <li
+                key={city.id}
+                className="flex items-center justify-between rounded-lg border p-3 shadow-sm"
+              >
+                <div>
+                  <p className="font-medium">{city.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {city.state ? `${city.state}, ` : ""}
+                    {city.country}
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Link
+                    to={`/city/${city.name}?lat=${city.lat}&lon=${city.lon}`}
+                  >
+                    <Button size="sm" variant="outline">
+                      View
+                    </Button>
+                  </Link>
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    onClick={() => removeFavorite.mutate(city.id)}
+                  >
+                    Remove
+                  </Button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
